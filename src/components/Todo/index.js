@@ -19,7 +19,7 @@ useEffect(()=>{
   return (
     <div>
         <Header addToDo={setToDos} toDos={toDos}/>
-        <List/>
+        <List toDos={toDos} />
         <Footer/>
     </div>
   )
