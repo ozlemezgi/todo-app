@@ -16,10 +16,12 @@ useEffect(()=>{
     console.log(toDos)
 },[toDos])
 
+const [state, setState] = useState(toDos);
+
   return (
     <div>
         <Header addToDo={setToDos} toDos={toDos}/>
-        <List toDos={toDos}/>
+        <List toDos={toDos} addToDos={setToDos} state={state} setState={setState}/>
         <Footer/>
     </div>
   )

@@ -1,20 +1,37 @@
 import React from 'react'
 
-function List({toDos}) {
+function List({toDos ,addToDos, state,setState}) {
 
-  return (
+// Checkbox'ı kontrol etmek
+const onClickList = () => {
+	addToDos(
+		toDos.map((i)=>{
+			const isToDoActive = toDos.some((e)=>{
+				return e.toDoActive === false
+			})
+			return isToDoActive === true ? {...i,toDoActive:true} : {...i,toDoActive:false}
+		})
+	)
+}
+
+return (
+
   <div>
       <section>
+{/* Mark All Butonu */}
         <input className="toggle-all" type="checkbox" />
-				<label htmlFor="toggle-all" >Mark all as complete</label>
+				<label htmlFor="toggle-all" onClick={onClickList} >Mark all as complete</label>
 
         <ul className='todo-list'>
           {toDos.map((toDo, i) => (
-            <li key={i}>
+            <li key={i} className={toDo.toDoActive ? "completed":""}>
             <div className="view" >
 
 {/* Checkbox */}
-              <input property="done" className="toggle" type="checkbox" />
+              <input property="done" className="toggle" type="checkbox" checked={toDo.toDoActive} onChange={()=>{
+				addToDos(toDos.map((i)=>{
+					return i === toDo ? {...i, toDoActive :!i.toDoActive} : i}))
+			  }}/>
 {/* toDos */}
               <label>{toDo.task}</label>
 {/* x */}
