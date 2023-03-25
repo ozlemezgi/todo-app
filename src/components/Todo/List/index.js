@@ -14,6 +14,24 @@ const onClickList = () => {
 	)
 }
 
+//Todoların hepsinin gözükmesi
+const clickAll = (e) => {
+	addToDos(toDos);
+}
+
+//Aktif todoların gözükmesi
+const clickActive = (e) => {
+	// e.PreventDefault();
+	addToDos(toDos.filter((toDo)=>toDo.toDoActive === false))
+}
+
+//Tamamlanmış todoların gözükmesi
+const clickComplated = (e) =>{
+	// e.PreventDefault();
+	addToDos(toDos.filter((toDo)=>toDo.toDoActive === true))
+
+}
+
 return (
 
   <div>
@@ -45,28 +63,28 @@ return (
 
 <footer className="footer">
 
-  {/* <!-- This should be `0 items left` by default --> */}
+ {/* <!-- This should be `0 items left` by default --> */}
 		<span class="todo-count">
 			<strong mv-value="todoLeft">0 items left</strong>
 		</span>
 
 		<ul class="filters">
+{/* All butonu			 */}
 			<li>
-				<a class="[if(activeFilter = 'all', 'selected')]"
-					mv-action="set(activeFilter, 'all')">All</a>
+				<a href="#/" className={toDos.toDoActive === true || toDos.toDoActive === false ? "selected":""} onClick={clickAll}>All</a>
 			</li>
+{/* Active Butonu */}
 			<li>
-				<a class="[if(activeFilter = 'active', 'selected')]"
-					mv-action="set(activeFilter, 'active')">Active</a>
+				<a href="#/" className={toDos.toDoActive === false ? "selected":""} onClick={clickActive}>Active</a>
 			</li>
+{/* Complated Butonu */}
 			<li>
-				<a class="[if(activeFilter = 'completed', 'selected')]"
-					mv-action="set(activeFilter, 'completed')">Completed</a>
+				<a href="#/" className={toDos.toDoActive === true ? "selected":""} onClick={clickComplated}>Completed</a>
 			</li>
 		</ul>
 		{/* <!-- Hidden if no completed items are left ↓ --> */}
 		<button hidden="[todoDone = 0]"
-				  class="clear-completed"
+				  className="clear-completed"
 				  mv-action="delete(todo where done)">
 			Clear completed
 		</button>
