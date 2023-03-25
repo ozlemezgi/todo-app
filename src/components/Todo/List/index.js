@@ -29,9 +29,13 @@ const clickActive = (e) => {
 const clickComplated = (e) =>{
 	// e.PreventDefault();
 	addToDos(toDos.filter((toDo)=>toDo.toDoActive === true))
-
 }
 
+const clickClear = (e)=> {
+	addToDos(toDos.filter((toDo)=>toDo.toDoActive === false))
+}
+
+const unCompleted = toDos.filter((item) => item.toDoActive === false);
 return (
 
   <div>
@@ -65,7 +69,7 @@ return (
 
  {/* <!-- This should be `0 items left` by default --> */}
 		<span class="todo-count">
-			<strong mv-value="todoLeft">0 items left</strong>
+			<strong mv-value="todoLeft">{unCompleted.length} items left</strong>
 		</span>
 
 		<ul class="filters">
@@ -82,10 +86,10 @@ return (
 				<a href="#/" className={toDos.toDoActive === true ? "selected":""} onClick={clickComplated}>Completed</a>
 			</li>
 		</ul>
-		{/* <!-- Hidden if no completed items are left ↓ --> */}
-		<button hidden="[todoDone = 0]"
+{/* Tamamlanmış olanları silme buttonu */}
+		<button  onClick={clickClear}
 				  className="clear-completed"
-				  mv-action="delete(todo where done)">
+				 >
 			Clear completed
 		</button>
 </footer>
