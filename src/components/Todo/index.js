@@ -33,28 +33,4 @@ export default Todo
 
 
 
- // const [tasks, setTasks] = useState([
-    //     { id: 1, text: 'Öğle yemeği hazırla', completed: false },
-    //     { id: 2, text: 'Spor yap', completed: false },
-    //     { id: 3, text: 'Müzik dinle', completed: false },
-    //   ]);
-    
-    //   // görev ekleme fonksiyonu
-    //   const addTask = (text) => {
-    //     const newTask = { id: Math.floor(Math.random() * 10000) + 1, text, completed: false };
-    //     setTasks([...tasks, newTask]);
-    //   };
-    
-    //   // görev silme fonksiyonu
-    //   const deleteTask = (id) => {
-    //     setTasks(tasks.filter((task) => task.id !== id));
-    //   };
-    
-    //   // görev tamamlama fonksiyonu
-    //   const toggleComplete = (id) => {
-    //     setTasks(
-    //       tasks.map((task) =>
-    //         task.id === id ? { ...task, completed: !task.completed } : task
-    //       )
-    //     );
-    //   };
+ 

@@ -2,6 +2,8 @@ import React from 'react'
 
 function List({toDos ,addToDos, state,setState}) {
 
+const allTodos = [...toDos];
+
 // Checkbox'ı kontrol etmek
 const onClickList = () => {
 	addToDos(
@@ -16,26 +18,28 @@ const onClickList = () => {
 
 //Todoların hepsinin gözükmesi
 const clickAll = (e) => {
-	addToDos(toDos);
+	//e.preventDefault();
+	addToDos(allTodos);
 }
 
 //Aktif todoların gözükmesi
 const clickActive = (e) => {
-	// e.PreventDefault();
-	addToDos(toDos.filter((toDo)=>toDo.toDoActive === false))
+	addToDos(allTodos.filter((toDo)=>toDo.toDoActive === false))
 }
 
 //Tamamlanmış todoların gözükmesi
 const clickComplated = (e) =>{
-	// e.PreventDefault();
-	addToDos(toDos.filter((toDo)=>toDo.toDoActive === true))
+	addToDos(allTodos.filter((toDo)=>toDo.toDoActive === true))
 }
 
+//Tamamlanan todoların tamamen silinmesi
 const clickClear = (e)=> {
-	addToDos(toDos.filter((toDo)=>toDo.toDoActive === false))
+	addToDos(allTodos.filter((toDo)=>toDo.toDoActive === false))
 }
 
+//tamamlanmayan todoların filtrelenmesi
 const unCompleted = toDos.filter((item) => item.toDoActive === false);
+
 return (
 
   <div>
@@ -57,7 +61,7 @@ return (
 {/* toDos */}
               <label>{toDo.task}</label>
 {/* x */}
-            <button className="destroy" mv-action="delete(todo)">x</button>
+            <button className="destroy" onClick={()=>{addToDos(toDos.filter((remove)=>remove!== toDo))}}></button>
 
             </div>
           </li>
@@ -68,11 +72,11 @@ return (
 <footer className="footer">
 
  {/* <!-- This should be `0 items left` by default --> */}
-		<span class="todo-count">
+		<span className="todo-count">
 			<strong mv-value="todoLeft">{unCompleted.length} items left</strong>
 		</span>
 
-		<ul class="filters">
+		<ul className="filters">
 {/* All butonu			 */}
 			<li>
 				<a href="#/" className={toDos.toDoActive === true || toDos.toDoActive === false ? "selected":""} onClick={clickAll}>All</a>
